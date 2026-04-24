@@ -1,0 +1,99 @@
+<section class="page-hero">
+  <p class="section-label">Field Work</p>
+  <h1>Gallery <span class="text-accent">&amp; Media</span></h1>
+  <p class="page-sub">A visual look at our work across fiber optic installations, testing, rack buildouts, and documentation. Photos are updated as projects are completed.</p>
+</section>
+
+<!-- Filter tabs -->
+<div class="gallery-filters">
+  <button [class.active]="active === 'all'"    (click)="active = 'all'">All</button>
+  <button [class.active]="active === 'fiber'"  (click)="active = 'fiber'">Fiber Works</button>
+  <button [class.active]="active === 'testing'"(click)="active = 'testing'">Testing</button>
+  <button [class.active]="active === 'rack'"   (click)="active = 'rack'">Rack Builds</button>
+  <button [class.active]="active === 'docs'"   (click)="active = 'docs'">Documentation</button>
+</div>
+
+<div class="gallery-grid">
+  @for (item of filtered; track item.label) {
+    <div class="gallery-card">
+      <div class="gallery-thumb">
+        <!-- Icon placeholder per category -->
+        @if (item.icon === 'fiber' || item.icon === 'pull') {
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="#1c1308"/>
+            <path d="M32 52 Q32 32 32 18" stroke="#e8740c" stroke-width="3" stroke-linecap="round"/>
+            <path d="M24 52 Q22 36 18 20" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M40 52 Q42 36 46 20" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="32" cy="18" r="4" fill="#f59e0b"/>
+            <circle cx="18" cy="20" r="3" fill="#e8740c"/>
+            <circle cx="46" cy="20" r="3" fill="#e8740c"/>
+          </svg>
+        }
+        @if (item.icon === 'splice') {
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="#1c1308"/>
+            <line x1="10" y1="32" x2="54" y2="32" stroke="#e8740c" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="6" fill="none" stroke="#f59e0b" stroke-width="2"/>
+            <circle cx="32" cy="32" r="2.5" fill="#f59e0b"/>
+            <line x1="32" y1="14" x2="32" y2="22" stroke="#5e4a2e" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="32" y1="42" x2="32" y2="50" stroke="#5e4a2e" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        }
+        @if (item.icon === 'otdr') {
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="#1c1308"/>
+            <rect x="14" y="20" width="36" height="24" rx="4" fill="#1c1f27" stroke="#e8740c" stroke-width="1.5"/>
+            <polyline points="18,36 24,28 30,34 36,24 42,30 46,26" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        }
+        @if (item.icon === 'fluke') {
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="#1c1308"/>
+            <rect x="18" y="16" width="28" height="32" rx="4" fill="#1c1f27" stroke="#e8740c" stroke-width="1.5"/>
+            <circle cx="32" cy="29" r="7" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+            <path d="M29 29l2 2 4-4" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="24" y="39" width="16" height="4" rx="1" fill="rgba(249,115,22,0.2)" stroke="#e8740c" stroke-width="1"/>
+          </svg>
+        }
+        @if (item.icon === 'rack' || item.icon === 'patch') {
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="#1c1308"/>
+            <rect x="16" y="12" width="32" height="40" rx="3" fill="#1c1f27" stroke="#e8740c" stroke-width="1.5"/>
+            <rect x="20" y="17" width="24" height="5" rx="1" fill="rgba(249,115,22,0.15)" stroke="#e8740c" stroke-width="0.8"/>
+            <rect x="20" y="25" width="24" height="5" rx="1" fill="rgba(249,115,22,0.15)" stroke="#e8740c" stroke-width="0.8"/>
+            <rect x="20" y="33" width="24" height="5" rx="1" fill="rgba(249,115,22,0.3)" stroke="#e8740c" stroke-width="0.8"/>
+            <rect x="20" y="41" width="24" height="5" rx="1" fill="rgba(249,115,22,0.15)" stroke="#e8740c" stroke-width="0.8"/>
+          </svg>
+        }
+        @if (item.icon === 'docs') {
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="#1c1308"/>
+            <path d="M22 14h14l10 10v26a2 2 0 01-2 2H22a2 2 0 01-2-2V16a2 2 0 012-2z" fill="#1c1f27" stroke="#e8740c" stroke-width="1.5"/>
+            <path d="M36 14v10h10" stroke="#e8740c" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="26" y1="32" x2="38" y2="32" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="26" y1="37" x2="38" y2="37" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="26" y1="42" x2="33" y2="42" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        }
+        @if (item.icon === 'network') {
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="#1c1308"/>
+            <circle cx="32" cy="22" r="5" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+            <circle cx="18" cy="40" r="4" fill="none" stroke="#e8740c" stroke-width="1.5"/>
+            <circle cx="46" cy="40" r="4" fill="none" stroke="#e8740c" stroke-width="1.5"/>
+            <line x1="32" y1="27" x2="20" y2="36" stroke="#5e4a2e" stroke-width="1.2"/>
+            <line x1="32" y1="27" x2="44" y2="36" stroke="#5e4a2e" stroke-width="1.2"/>
+            <line x1="22" y1="40" x2="42" y2="40" stroke="#5e4a2e" stroke-width="1.2" stroke-dasharray="3 2"/>
+          </svg>
+        }
+        <div class="gallery-cat-tag">{{ item.cat }}</div>
+      </div>
+      <div class="gallery-info">
+        <h4>{{ item.label }}</h4>
+        <p>{{ item.desc }}</p>
+      </div>
+    </div>
+  }
+</div>
+
+<p class="gallery-note">📷 Actual project photos coming soon. Contact us to see site-specific documentation and test reports.</p>

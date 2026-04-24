@@ -1,0 +1,28 @@
+<button class="hamburger" (click)="toggleMenu()" aria-label="Open menu">
+  <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+    <rect y="0"  width="18" height="2" rx="1" fill="currentColor"/>
+    <rect y="6"  width="18" height="2" rx="1" fill="currentColor"/>
+    <rect y="12" width="18" height="2" rx="1" fill="currentColor"/>
+  </svg>
+</button>
+
+<div class="overlay" [class.visible]="isOpen" (click)="toggleMenu()"></div>
+
+<nav class="sidebar" [class.open]="isOpen">
+  <button class="close-btn" (click)="toggleMenu()">&#10005;</button>
+
+  <p class="nav-section-label">Main</p>
+  <a routerLink="/home"        routerLinkActive="active" (click)="toggleMenu()">Home</a>
+  <a routerLink="/about"       routerLinkActive="active" (click)="toggleMenu()">About Us</a>
+  <a routerLink="/services"    routerLinkActive="active" (click)="toggleMenu()">Our Services</a>
+  <a routerLink="/clients"     routerLinkActive="active" (click)="toggleMenu()">Partner Clients</a>
+
+  <p class="nav-section-label">Company</p>
+  <a routerLink="/team"        routerLinkActive="active" (click)="toggleMenu()">Our People</a>
+  <a routerLink="/portfolio"   routerLinkActive="active" (click)="toggleMenu()">Portfolio</a>
+  <a routerLink="/credentials" routerLinkActive="active" (click)="toggleMenu()">Credentials</a>
+  <a routerLink="/gallery"     routerLinkActive="active" (click)="toggleMenu()">Gallery & Media</a>
+
+  <p class="nav-section-label">Connect</p>
+  <a routerLink="/contact"     routerLinkActive="active" (click)="toggleMenu()">Contact Us</a>
+</nav>

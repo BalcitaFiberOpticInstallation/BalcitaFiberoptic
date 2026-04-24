@@ -1,0 +1,103 @@
+<section class="page-hero">
+  <p class="section-label">Get In Touch</p>
+  <h1>Contact <span class="text-accent">Us</span></h1>
+  <p class="page-sub">Reach out for project inquiries, partnership discussions, or any questions about our services. We respond within 24 hours on business days.</p>
+</section>
+
+<div class="contact-layout">
+
+  <!-- Contact Info -->
+  <div class="contact-info">
+    <div class="info-block">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/></svg>
+      </div>
+      <div>
+        <p class="info-label">Service Area</p>
+        <p class="info-value">Metro Manila & Surrounding Areas</p>
+      </div>
+    </div>
+    <div class="info-block">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+      </div>
+      <div>
+        <p class="info-label">Email</p>
+        <p class="info-value">balcitafiberoptics&#64;gmail.com</p>
+      </div>
+    </div>
+    <div class="info-block">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/></svg>
+      </div>
+      <div>
+        <p class="info-label">Phone</p>
+        <p class="info-value">+63 — — — — — — — —</p>
+      </div>
+    </div>
+    <div class="info-block">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <p class="info-label">Business Hours</p>
+        <p class="info-value">Mon – Sat, 8:00 AM – 6:00 PM</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="contact-form-wrap">
+    @if (!submitted) {
+      <form class="contact-form" (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" [(ngModel)]="form.name" name="name" placeholder="Juan Dela Cruz" required/>
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" [(ngModel)]="form.company" name="company" placeholder="Your Company Inc."/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" [(ngModel)]="form.email" name="email" placeholder="you@company.com" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" [(ngModel)]="form.phone" name="phone" placeholder="+63 9XX XXX XXXX"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Project Type *</label>
+          <select [(ngModel)]="form.projectType" name="projectType" required>
+            <option value="" disabled selected>Select a service type</option>
+            <option>Fiber Optic Works</option>
+            <option>Testing & Commissioning</option>
+            <option>Structured Cabling & Rack Works</option>
+            <option>Network & Device Support</option>
+            <option>Documentation</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea [(ngModel)]="form.message" name="message" rows="5" placeholder="Describe your project — scope, location, timeline, or any specific requirements..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="f.invalid">Send Inquiry</button>
+      </form>
+    } @else {
+      <div class="success-state">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="rgba(249,115,22,0.15)"/><path d="M8 12l3 3 5-6" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Inquiry Sent!</h3>
+        <p>Thank you for reaching out. We'll get back to you within 24 hours on business days.</p>
+        <button class="submit-btn" (click)="reset()">Send Another</button>
+      </div>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,15 @@
+.main {
+  padding: 80px 32px 80px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.site-logo {
+  position: fixed;
+  top: 8px;
+  right: 16px;
+  z-index: 1000;
+  width: 52px;
+  height: 52px;
+  pointer-events: none;
+}

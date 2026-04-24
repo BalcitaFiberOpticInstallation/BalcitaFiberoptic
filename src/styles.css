@@ -1,1 +1,171 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  background: #111318;
+  font-family: 'Inter', Arial, sans-serif;
+  color: #f8fafc;
+}
+
+/* ── Global floating orb background ── */
+.global-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+}
+
+.orb-1 {
+  width: 600px; height: 600px;
+  background: rgba(249, 115, 22, 0.08);
+  top: -180px; left: -120px;
+  animation: orbDrift 13s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 500px; height: 500px;
+  background: rgba(234, 88, 12, 0.06);
+  bottom: -80px; right: -100px;
+  animation: orbDrift 17s ease-in-out infinite alternate-reverse;
+}
+
+.orb-3 {
+  width: 360px; height: 360px;
+  background: rgba(249, 115, 22, 0.04);
+  top: 45%; left: 45%;
+  animation: orbDrift 11s ease-in-out infinite alternate;
+}
+
+@keyframes orbDrift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(50px, 40px); }
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Shared page styles (About, Services, Clients) ── */
+.page-hero {
+  padding: 32px 0 56px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.page-hero h1 {
+  font-size: 52px;
+  font-weight: 800;
+  color: #f8fafc;
+  margin: 0 0 20px;
+  letter-spacing: -0.03em;
+}
+
+.page-sub {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #8b949e;
+  max-width: 640px;
+  margin: 0;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #f97316;
+  margin: 0 0 10px;
+}
+
+/* Info / Client card grids */
+.info-grid,
+.client-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 80px;
+  animation: fadeUp 0.7s 0.15s ease both;
+}
+
+.info-card,
+.client-card {
+  background: #1c1f27;
+  border: 1px solid #2a2d38;
+  border-radius: 14px;
+  padding: 28px 24px 28px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+.info-card:hover,
+.client-card:hover {
+  border-color: rgba(249, 115, 22, 0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(249, 115, 22, 0.08);
+}
+
+.info-card h3,
+.client-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.info-card p,
+.client-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #6b7280;
+  margin: 0;
+}
+
+.client-meta {
+  font-size: 11px !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #f97316 !important;
+  margin: 0 0 10px !important;
+}
+
+.card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #f97316, #ea580c);
+  border-radius: 14px 0 0 14px;
+}
+
+/* Shared animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 3D Page Entry Transition ── */
+@keyframes page3dEnter {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) rotateX(7deg) translateY(36px) scale(0.97);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1200px) rotateX(0deg) translateY(0px) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.page-enter {
+  animation: page3dEnter 0.55s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
