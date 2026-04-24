@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balcita Fiber Optic Installation Service</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #110c04;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: 'Rajdhani', system-ui, sans-serif;
+  cursor: pointer;
+}
+
+#click-prompt {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #110c04;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  flex-direction: column;
+  gap: 16px;
+  transition: opacity 0.5s ease;
+}
+#click-prompt span {
+  color: #c9b899;
+  font-size: 18px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  animation: promptPulse 2s ease-in-out infinite;
+}
+#click-prompt .icon-hint {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid #e8740c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: promptPulse 2s ease-in-out infinite;
+}
+#click-prompt .icon-hint::after {
+  content: '';
+  width: 0; height: 0;
+  border-left: 10px solid #e8740c;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  margin-left: 3px;
+}
+
+@keyframes promptPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.intro-container {
+  position: relative;
+  width: 680px;
+  height: 540px;
+  opacity: 0;
+}
+.intro-container.playing { opacity: 1; }
+
+svg { width: 100%; height: 100%; }
+
+.fiber1, .fiber2, .fiber3, .fiber-outer-l, .fiber-outer-r {
+  stroke-dashoffset: 120;
+  opacity: 0;
+}
+.fiber1 { stroke-dasharray: 120; }
+.fiber2 { stroke-dasharray: 110; }
+.fiber3 { stroke-dasharray: 110; }
+.fiber-outer-l, .fiber-outer-r { stroke-dasharray: 100; }
+
+.burst, .glow1, .glow2 { opacity: 0; }
+.dot-l, .dot-r, .dot-ol, .dot-or { opacity: 0; }
+.panel { opacity: 0; }
+.port { opacity: 0; }
+.ring { stroke-dasharray: 440; stroke-dashoffset: 440; opacity: 0; }
+.title-g { opacity: 0; }
+.subtitle-g { opacity: 0; }
+.divider-l, .divider-r { stroke-dasharray: 160; stroke-dashoffset: 160; opacity: 0; }
+.divider-dot { opacity: 0; }
+.svc-g { opacity: 0; }
+.tag-g { opacity: 0; }
+
+.playing .ring {
+  animation: ringReveal 2s ease-out 0.2s forwards;
+}
+.playing .fiber1 {
+  animation: drawFiber 1.8s ease-out 0.4s forwards;
+}
+.playing .fiber2 {
+  animation: drawFiber 1.8s ease-out 0.6s forwards;
+}
+.playing .fiber3 {
+  animation: drawFiber 1.8s ease-out 0.6s forwards;
+}
+.playing .fiber-outer-l, .playing .fiber-outer-r {
+  animation: drawFiberOuter 1.8s ease-out 0.8s forwards;
+}
+.playing .burst {
+  animation: burstIn 0.6s ease-out 1.6s forwards, continuousPulse 2s ease-in-out 2.2s infinite;
+}
+.playing .glow1 {
+  animation: glowIn 0.8s ease-out 1.6s forwards, continuousGlow 2.5s ease-in-out 2.4s infinite;
+}
+.playing .glow2 {
+  animation: glowOuterIn 1s ease-out 1.7s forwards;
+}
+.playing .dot-l, .playing .dot-r {
+  animation: dotIn 0.4s ease-out 1.8s forwards;
+}
+.playing .dot-ol, .playing .dot-or {
+  animation: dotSmallIn 0.4s ease-out 2s forwards;
+}
+.playing .panel {
+  animation: fadeIn 0.6s ease-out 1s forwards;
+}
+.playing .port {
+  animation: portFlicker 1.5s ease-out 1.2s forwards, portPulse 2s ease-in-out 2.7s infinite;
+}
+.playing .port:nth-child(2) { animation-delay: 1.3s, 2.8s; }
+.playing .port:nth-child(3) { animation-delay: 1.4s, 2.9s; }
+.playing .port:nth-child(4) { animation-delay: 1.35s, 2.85s; }
+.playing .port:nth-child(5) { animation-delay: 1.45s, 2.95s; }
+.playing .title-g {
+  animation: slideUp 0.8s ease-out 2.2s forwards;
+}
+.playing .divider-l, .playing .divider-r {
+  animation: drawLine 0.6s ease-out 2.6s forwards;
+}
+.playing .divider-dot {
+  animation: fadeIn 0.4s ease-out 2.8s forwards;
+}
+.playing .subtitle-g {
+  animation: slideUp 0.7s ease-out 2.8s forwards;
+}
+.playing .svc-g {
+  animation: slideUp 0.7s ease-out 3.2s forwards;
+}
+.playing .tag-g {
+  animation: fadeIn 0.6s ease-out 3.6s forwards;
+}
+
+@keyframes drawFiber {
+  0% { stroke-dashoffset: 120; opacity: 0; }
+  8% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes drawFiberOuter {
+  0% { stroke-dashoffset: 100; opacity: 0; }
+  10% { opacity: 0.7; }
+  100% { stroke-dashoffset: 0; opacity: 0.7; }
+}
+@keyframes burstIn {
+  0% { opacity: 0; transform: scale(0); }
+  60% { opacity: 1; transform: scale(1.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes continuousPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+@keyframes glowIn {
+  0% { opacity: 0; }
+  100% { opacity: 0.12; }
+}
+@keyframes continuousGlow {
+  0%, 100% { opacity: 0.08; transform: scale(1); }
+  50% { opacity: 0.16; transform: scale(1.15); }
+}
+@keyframes glowOuterIn {
+  0% { opacity: 0; }
+  100% { opacity: 0.05; }
+}
+@keyframes dotIn {
+  0% { opacity: 0; }
+  100% { opacity: 0.8; }
+}
+@keyframes dotSmallIn {
+  0% { opacity: 0; }
+  100% { opacity: 0.5; }
+}
+@keyframes ringReveal {
+  0% { stroke-dashoffset: 440; opacity: 0; }
+  15% { opacity: 0.25; }
+  100% { stroke-dashoffset: 0; opacity: 0.25; }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes drawLine {
+  0% { stroke-dashoffset: 160; opacity: 0; }
+  20% { opacity: 0.3; }
+  100% { stroke-dashoffset: 0; opacity: 0.3; }
+}
+@keyframes portFlicker {
+  0% { opacity: 0; }
+  20% { opacity: 0.3; }
+  40% { opacity: 0.1; }
+  60% { opacity: 0.35; }
+  80% { opacity: 0.15; }
+  100% { opacity: 0.3; }
+}
+@keyframes portPulse {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.38; }
+}
+
+.burst, .glow1, .glow2 { transform-origin: center; transform-box: fill-box; }
+</style>
+</head>
+<body>
+
+<div id="click-prompt">
+  <div class="icon-hint"></div>
+  <span>Click to play</span>
+</div>
+
+<div class="intro-container" id="intro">
+<svg viewBox="0 0 680 540" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="540" rx="12" fill="#110c04"/>
+
+<g transform="translate(340, 120)">
+  <circle cx="0" cy="0" r="70" fill="none" stroke="#5e4a2e" stroke-width="0.4" class="ring"/>
+
+  <path d="M0,52 L0,-30" fill="none" stroke="#e8740c" stroke-width="4" stroke-linecap="round" class="fiber1"/>
+  <path d="M-24,52 Q-24,10 -36,-26" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" class="fiber2"/>
+  <path d="M24,52 Q24,10 36,-26" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" class="fiber3"/>
+  <path d="M-44,48 Q-42,8 -56,-20" fill="none" stroke="#e8740c" stroke-width="2" stroke-linecap="round" class="fiber-outer-l"/>
+  <path d="M44,48 Q42,8 56,-20" fill="none" stroke="#e8740c" stroke-width="2" stroke-linecap="round" class="fiber-outer-r"/>
+
+  <circle cx="0" cy="-30" r="18" fill="#f59e0b" class="glow2"/>
+  <circle cx="0" cy="-30" r="11" fill="#f59e0b" class="glow1"/>
+  <circle cx="0" cy="-30" r="6" fill="#f59e0b" class="burst"/>
+  <circle cx="-36" cy="-26" r="4" fill="#e8740c" class="dot-l"/>
+  <circle cx="36" cy="-26" r="4" fill="#e8740c" class="dot-r"/>
+  <circle cx="-56" cy="-20" r="2.5" fill="#e8740c" class="dot-ol"/>
+  <circle cx="56" cy="-20" r="2.5" fill="#e8740c" class="dot-or"/>
+
+  <g class="panel">
+    <rect x="-52" y="48" width="104" height="10" rx="2" fill="#1c1308" stroke="#b8520a" stroke-width="0.8"/>
+  </g>
+  <rect x="-4" y="49" width="8" height="8" rx="1" fill="#e8740c" class="port"/>
+  <rect x="-20" y="49" width="8" height="8" rx="1" fill="#f59e0b" class="port"/>
+  <rect x="12" y="49" width="8" height="8" rx="1" fill="#f59e0b" class="port"/>
+  <rect x="-36" y="49" width="8" height="8" rx="1" fill="#e8740c" class="port"/>
+  <rect x="28" y="49" width="8" height="8" rx="1" fill="#e8740c" class="port"/>
+</g>
+
+<g class="title-g">
+  <text x="340" y="245" text-anchor="middle" fill="#f5ede4" font-size="48" font-weight="600" letter-spacing="4" font-family="Rajdhani, system-ui, sans-serif">BALCITA</text>
+</g>
+
+<line x1="185" y1="270" x2="330" y2="270" stroke="#e8740c" stroke-width="1.2" class="divider-l"/>
+<circle cx="340" cy="270" r="2.5" fill="#e8740c" opacity="0.5" class="divider-dot"/>
+<line x1="350" y1="270" x2="495" y2="270" stroke="#e8740c" stroke-width="1.2" class="divider-r"/>
+
+<g class="subtitle-g">
+  <text x="340" y="305" text-anchor="middle" fill="#e8740c" font-size="18" font-weight="600" letter-spacing="3" font-family="Rajdhani, system-ui, sans-serif">FIBER OPTIC</text>
+  <text x="340" y="335" text-anchor="middle" fill="#c9b899" font-size="13" letter-spacing="6" font-family="Rajdhani, system-ui, sans-serif">INSTALLATION SERVICE</text>
+</g>
+
+<g class="svc-g" transform="translate(340, 400)">
+  <rect x="-175" y="-22" width="350" height="44" rx="22" fill="none" stroke="#5e4a2e" stroke-width="0.5" opacity="0.25"/>
+
+  <circle cx="-120" cy="0" r="12" fill="none" stroke="#e8740c" stroke-width="0.8" opacity="0.5"/>
+  <line x1="-126" y1="0" x2="-121" y2="0" stroke="#e8740c" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="-119" y1="0" x2="-114" y2="0" stroke="#e8740c" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="-120" cy="0" r="2" fill="#f59e0b" opacity="0.7"/>
+
+  <circle cx="-40" cy="0" r="12" fill="none" stroke="#f59e0b" stroke-width="0.8" opacity="0.5"/>
+  <rect x="-46" y="-5" width="5" height="10" rx="1" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+  <rect x="-39" y="-7" width="5" height="14" rx="1" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+  <rect x="-32" y="-3" width="5" height="8" rx="1" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+
+  <circle cx="40" cy="0" r="12" fill="none" stroke="#e8740c" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="40" cy="0" r="5" fill="none" stroke="#e8740c" stroke-width="1" opacity="0.5"/>
+  <circle cx="40" cy="0" r="1.5" fill="#e8740c" opacity="0.6"/>
+  <path d="M34,-3 L37,0 L34,3" fill="none" stroke="#e8740c" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+  <path d="M46,-3 L43,0 L46,3" fill="none" stroke="#e8740c" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+
+  <circle cx="120" cy="0" r="12" fill="none" stroke="#f59e0b" stroke-width="0.8" opacity="0.5"/>
+  <path d="M115,-4 L119,1 L125,-5" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <line x1="114" y1="5" x2="126" y2="5" stroke="#f59e0b" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+</g>
+
+<g class="svc-g" transform="translate(340, 428)">
+  <text x="-120" y="0" text-anchor="middle" fill="#6b5d4f" font-size="8" letter-spacing="1" font-family="Rajdhani, system-ui, sans-serif">SPLICE</text>
+  <text x="-40" y="0" text-anchor="middle" fill="#6b5d4f" font-size="8" letter-spacing="1" font-family="Rajdhani, system-ui, sans-serif">BUILD</text>
+  <text x="40" y="0" text-anchor="middle" fill="#6b5d4f" font-size="8" letter-spacing="1" font-family="Rajdhani, system-ui, sans-serif">TEST</text>
+  <text x="120" y="0" text-anchor="middle" fill="#6b5d4f" font-size="8" letter-spacing="1" font-family="Rajdhani, system-ui, sans-serif">CERTIFY</text>
+</g>
+
+<g class="tag-g">
+  <text x="340" y="490" text-anchor="middle" fill="#5e4a2e" font-size="9" letter-spacing="3" font-family="Rajdhani, system-ui, sans-serif">PROJECT-BASED FIBER OPTIC SUB-CONTRACTOR</text>
+</g>
+</svg>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<script>
+const prompt = document.getElementById('click-prompt');
+const intro = document.getElementById('intro');
+let played = false;
+
+document.body.addEventListener('click', async () => {
+  if (played) return;
+  played = true;
+
+  await Tone.start();
+
+  prompt.style.opacity = '0';
+  setTimeout(() => { prompt.style.display = 'none'; }, 500);
+
+  intro.classList.add('playing');
+
+  // === SOUND DESIGN ===
+
+  // Low rumble base - starts immediately
+  const rumble = new Tone.Synth({
+    oscillator: { type: 'sine' },
+    envelope: { attack: 1.5, decay: 2, sustain: 0.1, release: 2 }
+  }).toDestination();
+  rumble.volume.value = -18;
+  rumble.triggerAttackRelease('C1', 4, Tone.now() + 0.2);
+
+  // Rising hum as fibers draw (0.4s - 2s)
+  const riseFilter = new Tone.Filter(200, 'lowpass').toDestination();
+  const riseSynth = new Tone.Synth({
+    oscillator: { type: 'sawtooth' },
+    envelope: { attack: 1.5, decay: 0.5, sustain: 0.3, release: 1 }
+  }).connect(riseFilter);
+  riseSynth.volume.value = -24;
+
+  riseFilter.frequency.rampTo(2000, 1.8, Tone.now() + 0.4);
+  riseSynth.triggerAttackRelease('C2', 2, Tone.now() + 0.4);
+
+  // Second harmonic layer
+  const rise2 = new Tone.Synth({
+    oscillator: { type: 'triangle' },
+    envelope: { attack: 1.2, decay: 0.8, sustain: 0.2, release: 1.5 }
+  }).toDestination();
+  rise2.volume.value = -22;
+  rise2.triggerAttackRelease('G2', 1.8, Tone.now() + 0.6);
+
+  // Panel click sounds (1.0s - 1.5s)
+  const noiseSynth = new Tone.NoiseSynth({
+    noise: { type: 'white' },
+    envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.02 }
+  }).toDestination();
+  noiseSynth.volume.value = -20;
+
+  for (let i = 0; i < 5; i++) {
+    setTimeout(() => noiseSynth.triggerAttackRelease('16n'), 1000 + i * 80);
+  }
+
+  // BURST - bright chime at 1.6s (the main hit)
+  const chimeReverb = new Tone.Reverb({ decay: 3, wet: 0.5 }).toDestination();
+  const chime = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: 'sine' },
+    envelope: { attack: 0.01, decay: 1.5, sustain: 0, release: 2 }
+  }).connect(chimeReverb);
+  chime.volume.value = -10;
+
+  setTimeout(() => {
+    chime.triggerAttackRelease(['E5', 'G#5', 'B5'], '2n');
+  }, 1600);
+
+  // Secondary shimmer after burst
+  const shimmer = new Tone.Synth({
+    oscillator: { type: 'sine' },
+    envelope: { attack: 0.05, decay: 2, sustain: 0, release: 1.5 }
+  }).connect(chimeReverb);
+  shimmer.volume.value = -16;
+  setTimeout(() => shimmer.triggerAttackRelease('E6', '2n'), 1750);
+
+  // Title reveal - deep warm tone (2.2s)
+  const titleSynth = new Tone.Synth({
+    oscillator: { type: 'sine' },
+    envelope: { attack: 0.3, decay: 1.5, sustain: 0.2, release: 2 }
+  }).toDestination();
+  titleSynth.volume.value = -14;
+  setTimeout(() => titleSynth.triggerAttackRelease('C3', '2n'), 2200);
+
+  const titleHarmonic = new Tone.Synth({
+    oscillator: { type: 'triangle' },
+    envelope: { attack: 0.4, decay: 1.2, sustain: 0.1, release: 1.5 }
+  }).toDestination();
+  titleHarmonic.volume.value = -18;
+  setTimeout(() => titleHarmonic.triggerAttackRelease('E3', '2n'), 2300);
+
+  // Subtitle subtle tone (2.8s)
+  const subSynth = new Tone.Synth({
+    oscillator: { type: 'sine' },
+    envelope: { attack: 0.5, decay: 1, sustain: 0.1, release: 1 }
+  }).toDestination();
+  subSynth.volume.value = -20;
+  setTimeout(() => subSynth.triggerAttackRelease('G3', '4n'), 2800);
+
+  // Service icons - soft ticks (3.2s)
+  const tick = new Tone.MetalSynth({
+    frequency: 400,
+    envelope: { attack: 0.001, decay: 0.08, release: 0.05 },
+    harmonicity: 3.1,
+    modulationIndex: 8,
+    resonance: 2000,
+    octaves: 0.5
+  }).toDestination();
+  tick.volume.value = -22;
+
+  for (let i = 0; i < 4; i++) {
+    setTimeout(() => tick.triggerAttackRelease('16n'), 3200 + i * 100);
+  }
+
+  // Final resolve - warm pad (3.6s)
+  const padReverb = new Tone.Reverb({ decay: 4, wet: 0.6 }).toDestination();
+  const pad = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: 'triangle' },
+    envelope: { attack: 0.8, decay: 2, sustain: 0.3, release: 3 }
+  }).connect(padReverb);
+  pad.volume.value = -16;
+  setTimeout(() => pad.triggerAttackRelease(['C3', 'E3', 'G3', 'B3'], '1n'), 3600);
+});
+</script>
+</body>
+</html>
