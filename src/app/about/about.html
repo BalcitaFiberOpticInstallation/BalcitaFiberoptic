@@ -6,24 +6,86 @@
 </section>
 
 <section class="info-grid">
-  <div class="info-card">
-    <div class="card-accent"></div>
-    <h3>Company Type</h3>
-    <p>Project-based fiber optic and network infrastructure contractor and subcontractor supporting enterprise, telecom, hospital, data center, and commercial infrastructure projects.</p>
+  @for (card of cards; track card.title) {
+    <div class="info-card clickable-card" (click)="openCard(card)">
+      <div class="card-accent"></div>
+      <div class="card-click-hint">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>{{ card.title }}</h3>
+      <p>{{ card.summary }}</p>
+    </div>
+  }
+</section>
+
+<!-- Detail Modal -->
+@if (activeCard) {
+  <div class="card-modal-overlay" (click)="closeCard()">
+    <div class="card-modal" (click)="$event.stopPropagation()">
+      <button class="card-modal-close" (click)="closeCard()" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="card-modal-header">
+        <div class="card-accent"></div>
+        <h2>{{ activeCard.title }}</h2>
+        <p class="card-modal-summary">{{ activeCard.summary }}</p>
+      </div>
+      <ul class="card-modal-items">
+        @for (item of activeCard.items; track item.label) {
+          <li class="card-modal-item">
+            <div class="card-modal-item-dot"></div>
+            <div>
+              <span class="card-modal-item-label">{{ item.label }}</span>
+              <span class="card-modal-item-desc">{{ item.desc }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
   </div>
-  <div class="info-card">
-    <div class="card-accent"></div>
-    <h3>Industries Served</h3>
-    <p>Supporting hospitals, data centers, commercial properties, telecom facilities, and corporate environments across major project sites in the Philippines.</p>
-  </div>
-  <div class="info-card">
-    <div class="card-accent"></div>
-    <h3>Documentation</h3>
-    <p>We provide complete project documentation, including quotations, bill of quantities, as-built plans, test results, progress reports, and turnover documents.</p>
-  </div>
-  <div class="info-card">
-    <div class="card-accent"></div>
-    <h3>Technical Expertise</h3>
-    <p>Hands-on experience in fiber backbone termination, fusion splicing, OTDR and Fluke testing, rack buildout, endpoint deployment, network validation, and structured cabling.</p>
+}
+
+<section class="calling-card-section">
+  <p class="section-label">Get In Touch</p>
+  <div class="calling-card">
+    <div class="calling-card-brand">
+      <div class="calling-card-logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="20" fill="rgba(249,115,22,0.12)"/>
+          <path d="M10 28 Q20 8 30 28" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <circle cx="10" cy="28" r="2.5" fill="#f97316"/>
+          <circle cx="20" cy="14" r="2.5" fill="#f97316"/>
+          <circle cx="30" cy="28" r="2.5" fill="#f97316"/>
+          <path d="M10 28 L20 14 L30 28" stroke="rgba(249,115,22,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="calling-card-name">BALCITA</h2>
+        <p class="calling-card-tagline">Fiber Optic Installation Services</p>
+      </div>
+    </div>
+
+    <div class="calling-card-divider"></div>
+
+    <div class="calling-card-contact">
+      <div class="calling-card-person">
+        <span class="calling-card-person-name">Joseph C. Balcita</span>
+        <span class="calling-card-person-role">Founder &amp; Principal · Project Manager</span>
+      </div>
+      <ul class="calling-card-details">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/></svg>
+          +63 956 346 3938
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+          joseph.balcita&#64;yahoo.com
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/></svg>
+          Nationwide · Philippines
+        </li>
+      </ul>
+    </div>
   </div>
 </section>

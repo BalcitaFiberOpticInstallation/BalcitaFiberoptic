@@ -5,11 +5,12 @@
 }
 
 .site-logo {
+  display: block;
   position: fixed;
   top: 8px;
   right: 16px;
   z-index: 1000;
   width: 52px;
   height: 52px;
-  pointer-events: none;
+  cursor: pointer;
 }

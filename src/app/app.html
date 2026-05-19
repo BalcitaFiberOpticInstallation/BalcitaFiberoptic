@@ -10,7 +10,7 @@
 <app-navbar></app-navbar>
 
 <!-- Site logo — top right, mirrors hamburger position -->
-<div class="site-logo">
+<a class="site-logo" routerLink="/home" aria-label="Go to homepage">
   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <!-- Circle background -->
     <circle cx="50" cy="50" r="50" fill="#110c04"/>
@@ -55,7 +55,7 @@
     <rect x="59" y="75" width="6" height="4" rx="1" fill="#3d2a0a"/>
     <rect x="67" y="75" width="6" height="4" rx="1" fill="#3d2a0a"/>
   </svg>
-</div>
+</a>
 <main class="main" [class.page-enter]="entering()">
   <router-outlet></router-outlet>
 </main>

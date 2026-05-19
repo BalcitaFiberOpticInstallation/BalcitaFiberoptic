@@ -1,1 +1,312 @@
 /* About page uses global .info-card styles from styles.css — JS tilt applied in about.ts */
+
+/* ── Clickable card hint ── */
+.clickable-card {
+  cursor: pointer;
+}
+
+.card-click-hint {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 22px;
+  height: 22px;
+  color: #f97316;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.card-click-hint svg {
+  width: 100%;
+  height: 100%;
+}
+
+.clickable-card:hover .card-click-hint {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Detail Modal ── */
+.card-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: fadeIn 0.18s ease both;
+}
+
+.card-modal {
+  background: #1c1f27;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: 18px;
+  padding: 36px 36px 32px;
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  animation: modalSlideUp 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(249, 115, 22, 0.1);
+}
+
+.card-modal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(249, 115, 22, 0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.card-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid #2a2d38;
+  border-radius: 8px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  padding: 0;
+}
+
+.card-modal-close:hover {
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.4);
+  color: #f97316;
+}
+
+.card-modal-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.card-modal-header {
+  margin-bottom: 24px;
+  padding-right: 32px;
+}
+
+.card-modal-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.card-modal-summary {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #6b7280;
+  margin: 0;
+}
+
+.card-modal-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.card-modal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid #2a2d38;
+}
+
+.card-modal-item:last-child {
+  padding-bottom: 0;
+}
+
+.card-modal-item-dot {
+  width: 7px;
+  height: 7px;
+  min-width: 7px;
+  background: #f97316;
+  border-radius: 50%;
+  margin-top: 6px;
+}
+
+.card-modal-item label,
+.card-modal-item-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+
+.card-modal-item-desc {
+  display: block;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 480px) {
+  .card-modal {
+    padding: 28px 20px 24px;
+    border-radius: 14px;
+  }
+}
+
+/* ── Calling Card ── */
+.calling-card-section {
+  margin-bottom: 80px;
+  animation: fadeUp 0.7s 0.25s ease both;
+}
+
+.calling-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: #1c1f27;
+  border: 1px solid #2a2d38;
+  border-radius: 18px;
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.calling-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(249,115,22,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.calling-card:hover {
+  border-color: rgba(249,115,22,0.4);
+  box-shadow: 0 20px 48px rgba(249,115,22,0.08);
+}
+
+.calling-card-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.calling-card-logo svg {
+  width: 56px;
+  height: 56px;
+}
+
+.calling-card-name {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #f8fafc;
+  margin: 0 0 4px;
+  line-height: 1;
+}
+
+.calling-card-tagline {
+  font-size: 12px;
+  font-weight: 500;
+  color: #f97316;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.calling-card-divider {
+  width: 1px;
+  height: 72px;
+  background: linear-gradient(180deg, transparent, #2a2d38 30%, #2a2d38 70%, transparent);
+  flex-shrink: 0;
+}
+
+.calling-card-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.calling-card-person {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.calling-card-person-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.01em;
+}
+
+.calling-card-person-role {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.calling-card-details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.calling-card-details li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.calling-card-details li svg {
+  width: 14px;
+  height: 14px;
+  color: #f97316;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .calling-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 28px 24px;
+  }
+
+  .calling-card-divider {
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #2a2d38 30%, #2a2d38 70%, transparent);
+  }
+}
