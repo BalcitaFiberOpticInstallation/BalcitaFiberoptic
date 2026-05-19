@@ -14,7 +14,22 @@ export class Contact implements AfterViewInit {
 
   constructor(private el: ElementRef) {}
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() {
+    const data = new URLSearchParams();
+    data.append('form-name', 'contact');
+    data.append('name', this.form.name);
+    data.append('company', this.form.company);
+    data.append('email', this.form.email);
+    data.append('phone', this.form.phone);
+    data.append('projectType', this.form.projectType);
+    data.append('message', this.form.message);
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data.toString()
+    }).then(() => { this.submitted = true; }).catch(() => { this.submitted = true; });
+  }
 
   reset() {
     this.form = { name: '', company: '', email: '', phone: '', projectType: '', message: '' };

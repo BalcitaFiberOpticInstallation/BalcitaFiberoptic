@@ -11,6 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Hidden form for Netlify detection (required for JS-rendered SPAs) -->
+  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="text" name="company" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <select name="projectType"></select>
+    <textarea name="message"></textarea>
+  </form>
   <app-root></app-root>
 </body>
 </html>
