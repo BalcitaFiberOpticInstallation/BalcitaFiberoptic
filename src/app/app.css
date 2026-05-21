@@ -14,3 +14,124 @@
   height: 52px;
   cursor: pointer;
 }
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid #2a2d38;
+  background: #0e1015;
+  padding: 40px 32px 28px;
+  margin-top: 60px;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #f97316;
+  letter-spacing: -0.01em;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.footer-tagline {
+  font-size: 12px;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.footer-nav a {
+  font-size: 14px;
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: #f97316;
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.footer-meta span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: #374151;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid #1e2028;
+}
+
+.viber-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 1000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #7360f2;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(115, 96, 242, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.viber-fab svg {
+  width: 28px;
+  height: 28px;
+}
+
+.viber-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(115, 96, 242, 0.7);
+}
+
+.viber-tooltip {
+  position: absolute;
+  right: 68px;
+  background: #1e2028;
+  color: #f8fafc;
+  font-size: 13px;
+  font-family: 'Inter', Arial, sans-serif;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  border: 1px solid rgba(115, 96, 242, 0.3);
+}
+
+.viber-fab:hover .viber-tooltip {
+  opacity: 1;
+}

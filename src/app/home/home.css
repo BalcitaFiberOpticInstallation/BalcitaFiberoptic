@@ -233,6 +233,34 @@ h1 {
   margin: 0;
 }
 
+.card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card ul li {
+  font-size: 14px;
+  color: #94a3b8;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.card ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f97316;
+}
+
 /* ── Animations ── */
 @keyframes fadeUp {
   from {
